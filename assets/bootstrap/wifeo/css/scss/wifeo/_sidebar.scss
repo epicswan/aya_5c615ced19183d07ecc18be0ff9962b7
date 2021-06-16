@@ -1,0 +1,212 @@
+.we-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+.we-sidebar-sticky {
+    display: flex;
+    flex-direction: column;
+    position: -webkit-sticky;
+    position: sticky;
+    //   height: 100vh;
+    height: 100%;
+    padding-top: 0.5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+/* Eviter des mots trop long qui depasse de leur container */
+.we-text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.we-btn-icon {
+    cursor: pointer;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+.we-btn-icon:first-child {
+    cursor: pointer;
+    padding-left: 0;
+}
+
+.we-btn-icon:last-child {
+    cursor: pointer;
+    padding-right: 0;
+}
+
+.we-text-greyX {
+    color: $gray-300;
+}
+
+.we-sidebar-nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.we-sidebar-list {
+    min-height: 225px;
+}
+
+.we-sidebar.we-bg-dark {
+    a {
+        text-decoration: none;
+        color: $gray-300;
+    }
+}
+
+.we-sidebar-body {
+    flex-grow: 1;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.we-sidebar-nav-link {
+    display: flex;
+    justify-content: space-between;
+}
+
+.we-sidebar-header {
+    margin-bottom: 1rem;
+}
+
+.we-sidebar-header .we-sidebar-nav-item-action,
+.we-sidebar-body .we-sidebar-nav-item-action {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1.3rem;
+    padding-left: 1.3rem;
+}
+
+.we-sidebar-header .we-sidebar-nav-item {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1.3rem;
+    padding-left: 1.3rem;
+}
+
+.we-sidebar-footer .we-sidebar-nav-item {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1.3rem;
+    padding-left: 1.3rem;
+    border-top: 1px rgb(150, 162, 188) solid;
+}
+
+.we-sidebar-body .we-sidebar-nav-item {
+    border-bottom: 1px rgb(150, 162, 188) solid;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1.3rem;
+    padding-left: 1.3rem;
+}
+
+.we-sidebar-item-flex {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px rgb(150, 162, 188) solid;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1.3rem;
+    padding-left: 1.3rem;
+}
+
+.we-sidebar-item-opts {
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.we-sidebar-item-opts > li {
+    padding-right: 1.3rem;
+    padding-left: 1.3rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.35rem;
+    cursor: pointer;
+}
+// decalage pour les items imbrique // todo trouver moyen moins ugly pls
+.we-sidebar-nav.we-sidebar-body
+    .we-sidebar-nav.we-sidebar-body
+    .we-sidebar-nav.we-sidebar-body
+    .we-sidebar-item-flex {
+    padding-left: 3rem;
+}
+
+.gu-transit .we-sidebar-item-flex {
+    border: 2px dotted orange;
+}
+// .we-sidebar-nav.we-sidebar-body[data-isDropdown="true"] .gu-transit .we-sidebar-item-flex {
+//         margin-left: 2rem;
+//     }
+
+//     .gu-over .we-sidebar-nav.we-sidebar-body[data-isDropdown="true"] .gu-transit .we-sidebar-item-flex {
+//         margin-left: 2rem;
+//     }
+
+// // .gu-over .dnd:not(.gu-transit) .we-sidebar-nav.we-sidebar-body[data-isDropdown="true"][data-hasChildren="false"]{
+// //     min-height: 40px;
+// //     margin-bottom: 20px;
+// // }
+ul.we-sidebar-nav.we-sidebar-body[data-hasChildren="false"] {
+    min-height: 20px;
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+}
+
+// // .gu-over .we-sidebar-nav.we-sidebar-body[data-isDropdown="true"][data-hasChildren="false"]{
+// //     min-height: 40px;
+// //     margin-bottom: 20px;
+// // }
+
+// .we-sidebar-nav.we-sidebar-body[data-isDropdown="true"][data-hasChildren="false"] .we-sidebar-nav.we-sidebar-body[data-isDropdown="true"][data-hasChildren="false"]{
+//     min-height: 10px;
+//     margin-bottom: 20px;
+// }
+
+// // li.dnd[data-hasChildren="true"]{
+// //     padding-bottom: 20px;
+// //     margin-bottom: 10px;
+// // }
+
+// // .we-sidebar-nav.we-sidebar-body{
+// //     min-height: 50px;
+// // }
+
+.we-sidebar-nav.we-sidebar-body
+    .we-sidebar-nav.we-sidebar-body
+    .we-sidebar-nav.we-sidebar-body[data-isDropdown="true"]
+    .gu-transit
+    .we-sidebar-item-flex {
+    margin-left: 4rem;
+}
+
+.we-sidebar-nav.we-sidebar-body
+    .we-sidebar-nav.we-sidebar-body[data-isDropdown="true"]
+    .gu-transit
+    .we-sidebar-item-flex {
+    margin-left: 2rem;
+}
+
+ul.we-sidebar-nav.we-sidebar-body[data-hasChildren="true"] {
+    min-height: 20px;
+    // padding-bottom: 15px;
+    // margin-bottom: 5px;
+}
+
+.we-sidebar-nav-link.we-disabled {
+    pointer-events: none;
+}

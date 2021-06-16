@@ -1,0 +1,10 @@
+// Width and height
+
+@each $prop, $abbrev in (width: w, height: h) {
+  @each $size, $length in $sizes {
+    .we-#{$abbrev}-#{$size} { #{$prop}: $length !important; }
+  }
+}
+
+.we-mw-100 { max-width: 100% !important; }
+.we-mh-100 { max-height: 100% !important; }
