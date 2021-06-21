@@ -1,0 +1,52 @@
+//
+// Border
+//
+
+.we-border          { border: 1px solid $gray-200 !important; }
+.we-border-0        { border: 0 !important; }
+.we-border-top-0    { border-top: 0 !important; }
+.we-border-right-0  { border-right: 0 !important; }
+.we-border-bottom-0 { border-bottom: 0 !important; }
+.we-border-left-0   { border-left: 0 !important; }
+
+@each $color, $value in $theme-colors {
+  .we-border-#{$color} {
+    border-color: $value !important;
+  }
+}
+
+.we-border-white {
+  border-color: $white !important;
+}
+
+//
+// Border-radius
+//
+
+.we-rounded {
+  border-radius: $border-radius !important;
+}
+.we-rounded-top {
+  border-top-left-radius: $border-radius !important;
+  border-top-right-radius: $border-radius !important;
+}
+.we-rounded-right {
+  border-top-right-radius: $border-radius !important;
+  border-bottom-right-radius: $border-radius !important;
+}
+.we-rounded-bottom {
+  border-bottom-right-radius: $border-radius !important;
+  border-bottom-left-radius: $border-radius !important;
+}
+.we-rounded-left {
+  border-top-left-radius: $border-radius !important;
+  border-bottom-left-radius: $border-radius !important;
+}
+
+.we-rounded-circle {
+  border-radius: 50%;
+}
+
+.we-rounded-0 {
+  border-radius: 0;
+}

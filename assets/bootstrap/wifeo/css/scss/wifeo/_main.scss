@@ -1,0 +1,153 @@
+@each $color, $value in $theme-colors {
+    .we-scrimGradient-#{$color} {
+        @include scrimGradient($value, "to top", "ease-in-out-sine", 10, 100);
+    }
+}
+
+/* TODO: GENERER LES TAILLES */
+
+@include media-breakpoint-down(sm) {
+    .we-btn-block-sm {
+        display: block;
+        width: 100%;
+    }
+    .we-btn-block-sm + .we-btn-block-sm {
+        margin-top: 0.5rem;
+    }
+}
+
+.we-caret-light {
+    color: white !important;
+    caret-color: white !important;
+}
+
+.we-fa::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    @include weFontawesome($gray-500);
+}
+
+.we-fa:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    @include weFontawesome($gray-500);
+    opacity: 1;
+}
+
+.we-fa::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    @include weFontawesome($gray-500);
+    opacity: 1;
+}
+
+.we-fa:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    @include weFontawesome($gray-500);
+}
+
+.we-fa::-ms-input-placeholder {
+    /* Microsoft Edge */
+    @include weFontawesome($gray-500);
+}
+
+.we-fa::placeholder {
+    /* Most modern browsers support this now. */
+    @include weFontawesome($gray-500);
+}
+
+.we-rotate-45 {
+    @include rotate(45);
+}
+
+.we-rotate-90 {
+    @include rotate(90);
+}
+
+.we-rotate-135 {
+    @include rotate(135);
+}
+
+.we-rotate-180 {
+    @include rotate(180);
+}
+
+.we-cursor-pointer {
+    cursor: pointer;
+}
+
+.we-rounded-left-only {
+    border-top-left-radius: 0.3rem !important;
+    border-bottom-left-radius: 0.3rem !important;
+    border-top-right-radius: 0rem !important;
+    border-bottom-right-radius: 0rem !important;
+}
+
+.we-rounded-right-only {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 0.3rem !important;
+    border-bottom-right-radius: 0.3rem !important;
+}
+
+.we-round-color {
+    height: 75px;
+    width: 75px;
+}
+
+.we-round-color-sm {
+    height: 50px;
+    width: 50px;
+}
+
+@include media-breakpoint-down(md) {
+    .we-round-color {
+        height: 50px;
+        width: 50px;
+    }
+}
+
+.we-libImg-input-box {
+    background-color: #dddfe2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.we-libImg-input {
+    width: 100%;
+    height: 10rem;
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.we-h-100-px {
+    height: 100px;
+    width: 150px;
+}
+
+.scrolling-wrapper-flexbox {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 2rem 2rem 0rem 2rem;
+    .item-scroll {
+        flex: 0 0 auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.we-text-in-edit {
+    padding: 1px;
+    min-width: 100%;
+    min-height: 22px;
+    &:hover {
+        border: 1px solid #dddfe2;
+        padding: 0px;
+    }
+}
+
+.we-section-new-item-first {
+    // padding-bottom: 16px;
+}

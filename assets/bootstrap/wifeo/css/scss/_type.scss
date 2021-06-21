@@ -1,0 +1,135 @@
+//
+// Headings
+//
+
+h1, h2, h3, h4, h5, h6,
+.we-h1, .we-h2, .we-h3, .we-h4, .we-h5, .we-h6 {
+  margin-bottom: $headings-margin-bottom;
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+  line-height: $headings-line-height;
+  color: $headings-color;
+}
+
+h1, .we-h1 { font-size: $h1-font-size; }
+h2, .we-h2 { font-size: $h2-font-size; }
+h3, .we-h3 { font-size: $h3-font-size; }
+h4, .we-h4 { font-size: $h4-font-size; }
+h5, .we-h5 { font-size: $h5-font-size; }
+h6, .we-h6 { font-size: $h6-font-size; }
+
+.we-lead {
+  font-size: $lead-font-size;
+  font-weight: $lead-font-weight;
+}
+
+// Type display classes
+.we-display-1 {
+  font-size: $display1-size;
+  font-weight: $display1-weight;
+  line-height: $display-line-height;
+}
+.we-display-2 {
+  font-size: $display2-size;
+  font-weight: $display2-weight;
+  line-height: $display-line-height;
+}
+.we-display-3 {
+  font-size: $display3-size;
+  font-weight: $display3-weight;
+  line-height: $display-line-height;
+}
+.we-display-4 {
+  font-size: $display4-size;
+  font-weight: $display4-weight;
+  line-height: $display-line-height;
+}
+
+.we-display-5 {
+  font-size: $display5-size;
+  font-weight: $display5-weight;
+  line-height: $display-line-height;
+}
+
+.we-display-6 {
+  font-size: $display6-size;
+  font-weight: $display6-weight;
+  line-height: $display-line-height;
+}
+
+
+//
+// Horizontal rules
+//
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: $hr-border-width solid $hr-border-color;
+}
+
+
+//
+// Emphasis
+//
+
+small,
+.we-small {
+  font-size: $small-font-size;
+  font-weight: $font-weight-normal;
+}
+
+mark,
+.we-mark {
+  padding: $mark-padding;
+  background-color: $mark-bg;
+}
+
+
+//
+// Lists
+//
+
+.we-list-unstyled {
+  @include list-unstyled;
+}
+
+// Inline turns list items into inline-block
+.we-list-inline {
+  @include list-unstyled;
+}
+.we-list-inline-item {
+  display: inline-block;
+
+  &:not(:last-child) {
+    margin-right: $list-inline-padding;
+  }
+}
+
+
+//
+// Misc
+//
+
+// Builds on `abbr`
+.we-initialism {
+  font-size: 90%;
+  text-transform: uppercase;
+}
+
+// Blockquotes
+.we-blockquote {
+  margin-bottom: $spacer;
+  font-size: $blockquote-font-size;
+}
+
+.we-blockquote-footer {
+  display: block;
+  font-size: 80%; // back to default font-size
+  color: $blockquote-small-color;
+
+  &::before {
+    content: "\2014 \00A0"; // em dash, nbsp
+  }
+}

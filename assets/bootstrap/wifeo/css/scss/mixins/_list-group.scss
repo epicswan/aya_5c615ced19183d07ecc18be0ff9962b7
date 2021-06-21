@@ -1,0 +1,26 @@
+// List Groups
+
+@mixin list-group-item-variant($state, $background, $color) {
+  .we-list-group-item-#{$state} {
+    color: $color;
+    background-color: $background;
+  }
+
+  //scss-lint:disable QualifyingElement
+  a.we-list-group-item-#{$state},
+  button.we-list-group-item-#{$state} {
+    color: $color;
+
+    @include hover-focus {
+      color: $color;
+      background-color: darken($background, 5%);
+    }
+
+    &.we-active {
+      color: #fff;
+      background-color: $color;
+      border-color: $color;
+    }
+  }
+  // scss-lint:enable QualifyingElement
+}
