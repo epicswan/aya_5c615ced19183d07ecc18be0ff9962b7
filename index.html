@@ -1,37 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Wifeo React Editor</title>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
-    <link href="/global.css" rel="stylesheet" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/fr.js"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;400;500;700&display=swap" rel="stylesheet">
-
-
-    <link rel="stylesheet" href="https://editor.wifeosite.com/assets/css/styles.css?v=1580395078917">
-    <link rel="stylesheet" href="https://editor.wifeosite.com/assets/css/sortable-tree-editor.css?v=0.0.154">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/plupload/2.3.6/plupload.full.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
-
-    <link rel="stylesheet" href="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.css">
-
-
-    <script>window.__ENV_MODE = Object.freeze({
+    <script>
+      window.__ENV_MODE = Object.freeze({
         production: false,
         subdomain: "",
         domainApi: "",
@@ -46,788 +26,263 @@
         pathToBuyDomain: "domaines",
         pathToBuyPlans: "offres",
         pathParent: null,
+        cdnPath:
+          "https://c615ced19183d07ecc18be0ff9962b7-lx4pa.ondigitalocean.app/editor",
         // Pour la page dashboard/facturation
         uidPaiementWifeosite: {
-            distant_id: 7,
-            uid: "832D00A7-4E51-4438-8754-3BE4F30C3F34"
+          distant_id: 7,
+          uid: "832D00A7-4E51-4438-8754-3BE4F30C3F34",
         },
         // version des fichiers statics, pour forcer le rafraichement des fichiers apres une maj
         // correspond a Date.now()
-        versionFiles: "0.0.0",
-        hostWifeoCms: "www.wifeocms.com"
-    });</script>
-
-    <script>window["__CONTAINER_ORDERS"] = [];</script>
-    <script>window.__PLAN_SITE = "PRO";</script>
-    <script>window.__METADATA = null;</script>
-
-<link rel="shortcut icon" href="/favicon-32x32.ico"></head>
-
-<body>
-<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-
-<div id="root"></div>
-<div id="modal-sortable-tree-editor"></div>
-
-<style>
-    /**
-    Text**/
-    .text-in-edition:hover {
-        background-color: #57c5f7;
-        cursor: pointer;
-        border: 1px dotted darkblue;
-        padding: 1px;
-    }
+        //versionFiles: "0.0.0",
+        versionFiles:
+          "https://c615ced19183d07ecc18be0ff9962b7-lx4pa.ondigitalocean.app/editor/check.js",
+        hostWifeoCms: "www.wifeocms.com",
+      });
+    </script>
 
 
-    /** Metas
-    **/
-    .meta__card_body {
-        width: 408px;
-    }
+    <script>
+      scriptsStore = Object.freeze([
+        {
+          name: "bundle",
+          src: "bundle.js",
+          integrity: "",
+          external: false,
+        },
+        {
+          name: "react",
+          src: "https://unpkg.com/react@16/umd/react.development.js",
+          integrity: "",
+          external: true,
+        },
+        {
+          name: "reactDom",
+          integrity: "",
+          src: "https://unpkg.com/react-dom@16/umd/react-dom.development.js",
+          external: true,
+        },
+      ]);
 
-    .app__list__item {
-        padding: 0.2rem !important;
-        margin-top: 0.3rem;
-        margin-bottom: 0.35rem;
+      scripts = [];
 
+      scriptsStore.forEach((script) => {
+        scripts[script.name] = {
+          loaded: false,
+          src: script.src,
+          id: script.id,
+          dependencies: script.dependencies || [],
+          type: script.type || "js",
+          name: script.name,
+          external: script.external,
+        };
+      });
 
-    }
+     
 
-    .app__list__item i {
-        margin-right: 1rem;
-    }
+      function getVersionNumber() {
 
-    .ap_google_titre {
-        font-size: 18px;
-        color: #1a0dab;
-        font-family: arial, sans-serif;
-        margin-top: 10px;
-    }
+        /// GET REQUEST on --> window.__ENV_MODE.versionFiles
 
-    .ap_google_url {
-        font-size: 14px;
-        color: #006621;
-        font-family: arial, sans-serif;
-        margin-top: 0px;
-    }
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("1.0.0");
+          }, 2000);
+        });
 
-    .ap_google_description {
-        font-size: 14px;
-        color: #545454;
-        font-family: arial, sans-serif;
-        margin-top: 0px;
-    }
+        //reject("0.0.0");
 
+      }
 
-    /** slider design
-    **/
-    .rc-slider {
-        position: relative;
-        height: 14px;
-        padding: 5px 0;
-        width: 100%;
-        border-radius: 6px;
-        touch-action: none;
-        box-sizing: border-box;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    }
+      getVersionNumber().then((numVersion) => {
+        console.log("num:", numVersion);
+        load("js", ["react", "reactDom", "bundle"], numVersion)
+          .then((data) => {
+            console.log("On a charge l'app avec son num version");
+          })
+          .catch((c) => {
+            console.log("les choses ont mal tournées", c);
+          });
+      });
 
-    .rc-slider * {
-        box-sizing: border-box;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    }
+      function getVersionFiles(script, numVersion) {
+        console.log("script version :", script.name, script.versioning, script);
+        if (script.external) {
+          return script.src;
+        } else {
+          return (
+            window.__ENV_MODE.cdnPath + "/" + numVersion + "/" + script.src
+          );
+        }
+      }
 
-    .rc-slider-rail {
-        position: absolute;
-        width: 100%;
-        background-color: #e9e9e9;
-        height: 4px;
-        border-radius: 6px;
-    }
+      function load(type, scripts, numVersion) {
+        const promises = [];
+        scripts.forEach((script) =>
+          promises.push(this.loadScript(type, script, numVersion))
+        );
+        return Promise.all(promises);
+      }
 
-    .rc-slider-track {
-        position: absolute;
-        left: 0;
-        height: 4px;
-        border-radius: 6px;
-        background-color: #abe2fb;
-    }
+      function loadScript(type, name, numVersion) {
+        return new Promise((resolve, reject) => {
+          if (!scripts[name]) {
+            console.error("the script " + name + " isn't in the registry");
+            return;
+          }
+          // resolve if already loaded
+          if (scripts[name].loaded) {
+            const id = this.scripts[name].id;
+            resolve({
+              script: name,
+              loaded: true,
+              status: "Already Loaded",
+              id,
+            });
+          } else {
+            // load script
+            const { id, text } = scripts[name];
+            const script =
+              type === "css"
+                ? this.scriptCss(name, id, text, numVersion)
+                : this.scriptJs(name, id, text, numVersion);
+            if (script.readyState) {
+              // IE
+              script.onreadystatechange = () => {
+                if (
+                  script.readyState === "loaded" ||
+                  script.readyState === "complete"
+                ) {
+                  script.onreadystatechange = null;
+                  this.scripts[name].loaded = true;
+                  resolve({
+                    script: name,
+                    loaded: true,
+                    status: "Loaded",
+                    id,
+                  });
+                }
+              };
+            } else {
+              // Others
+              script.onload = () => {
+                this.scripts[name].loaded = true;
+                resolve({
+                  script: name,
+                  loaded: true,
+                  status: "Loaded",
+                  id,
+                });
+              };
+            }
+            script.onerror = (error) =>
+              resolve({ script: name, loaded: false, status: "Loaded" });
+            document.getElementsByTagName("head")[0].appendChild(script);
+          }
+        });
+      }
 
-    .rc-slider-handle {
-        position: absolute;
-        width: 14px;
-        height: 14px;
-        cursor: pointer;
-        cursor: -webkit-grab;
-        margin-top: -5px;
-        cursor: grab;
-        border-radius: 50%;
-        border: solid 2px #96dbfa;
-        background-color: #fff;
-        touch-action: pan-x;
-    }
+      function loader(...scripts) {
+        const promises = [];
+        scripts.forEach((script) => {
+          if (scripts[script]) {
+            const type = scripts[script].type;
+            promises.push(this.loadScript(type, script));
+          }
+        });
+        return Promise.all(promises);
+      }
 
-    .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
-        border-color: #57c5f7;
-        box-shadow: 0 0 0 5px #96dbfa;
-    }
+      function scriptJs(name, id, text, numVersion) {
+        const script = document.createElement("script");
+        if (id) {
+          script.id = id;
+        }
+        if (text) {
+          script.text = text;
+        }
+        script.type = "text/javascript";
+        script.src = this.getVersionFiles(this.scripts[name], numVersion);
+        return script;
+      }
 
-    .rc-slider-handle:focus {
-        outline: none;
-    }
+      function scriptCss(name, id, text, numVersion) {
+        const script = document.createElement("link");
+        if (id) {
+          script.id = id;
+        }
+        if (text) {
+          script.text = text;
+        }
+        script.type = "text/css";
+        script.rel = "stylesheet";
+        script.href = this.getVersionFiles(scripts[name], numVersion);
+        return script;
+      }
 
-    .rc-slider-handle-click-focused:focus {
-        border-color: #96dbfa;
-        box-shadow: unset;
-    }
+      function getScripts() {
+        return scripts;
+      }
 
-    .rc-slider-handle:hover {
-        border-color: #57c5f7;
-    }
+      function getScriptByName(name) {
+        return scripts[name];
+      }
 
-    .rc-slider-handle:active {
-        border-color: #57c5f7;
-        box-shadow: 0 0 5px #57c5f7;
-        cursor: -webkit-grabbing;
-        cursor: grabbing;
-    }
+      function addScript(script, replace = false) {
+        if (!scripts[script.name] || replace) {
+          scripts[script.name] = script;
+          return true;
+        }
+        return false;
+      }
 
-    .rc-slider-mark {
-        position: absolute;
-        top: 18px;
-        left: 0;
-        width: 100%;
-        font-size: 12px;
-    }
+      function removeScript(name, keepNode = true, keepInStore) {
+        if (this.scripts[name]) {
+          if (!keepNode) {
+            const curThemeNode = document.getElementById(this.scripts[name].id);
+            if (curThemeNode) {
+              curThemeNode.remove();
+            }
+          }
 
-    .rc-slider-mark-text {
-        position: absolute;
-        display: inline-block;
-        vertical-align: middle;
-        text-align: center;
-        cursor: pointer;
-        color: #999;
-    }
+          if (keepInStore) {
+            this.scripts[name].loaded = false;
+          } else {
+            delete this.scripts[name];
+          }
 
-    .rc-slider-mark-text-active {
-        color: #666;
-    }
-
-    .rc-slider-step {
-        position: absolute;
-        width: 100%;
-        height: 4px;
-        background: transparent;
-    }
-
-    .rc-slider-dot {
-        position: absolute;
-        bottom: -2px;
-        margin-left: -4px;
-        width: 8px;
-        height: 8px;
-        border: 2px solid #e9e9e9;
-        background-color: #fff;
-        cursor: pointer;
-        border-radius: 50%;
-        vertical-align: middle;
-    }
-
-    .rc-slider-dot-active {
-        border-color: #96dbfa;
-    }
-
-    .rc-slider-dot-reverse {
-        margin-right: -4px;
-    }
-
-    .rc-slider-disabled {
-        background-color: #e9e9e9;
-    }
-
-    .rc-slider-disabled .rc-slider-track {
-        background-color: #cccccc;
-    }
-
-    .rc-slider-disabled .rc-slider-handle,
-    .rc-slider-disabled .rc-slider-dot {
-        border-color: #cccccc;
-        box-shadow: none;
-        background-color: #fff;
-        cursor: not-allowed;
-    }
-
-    .rc-slider-disabled .rc-slider-mark-text,
-    .rc-slider-disabled .rc-slider-dot {
-        cursor: not-allowed !important;
-    }
-
-    .rc-slider-vertical {
-        width: 14px;
-        height: 100%;
-        padding: 0 5px;
-    }
-
-    .rc-slider-vertical .rc-slider-rail {
-        height: 100%;
-        width: 4px;
-    }
-
-    .rc-slider-vertical .rc-slider-track {
-        left: 5px;
-        bottom: 0;
-        width: 4px;
-    }
-
-    .rc-slider-vertical .rc-slider-handle {
-        margin-left: -5px;
-        touch-action: pan-y;
-    }
-
-    .rc-slider-vertical .rc-slider-mark {
-        top: 0;
-        left: 18px;
-        height: 100%;
-    }
-
-    .rc-slider-vertical .rc-slider-step {
-        height: 100%;
-        width: 4px;
-    }
-
-    .rc-slider-vertical .rc-slider-dot {
-        left: 2px;
-        margin-bottom: -4px;
-    }
-
-    .rc-slider-vertical .rc-slider-dot:first-child {
-        margin-bottom: -4px;
-    }
-
-    .rc-slider-vertical .rc-slider-dot:last-child {
-        margin-bottom: -4px;
-    }
-
-    .rc-slider-tooltip-zoom-down-enter,
-    .rc-slider-tooltip-zoom-down-appear {
-        animation-duration: .3s;
-        animation-fill-mode: both;
-        display: block !important;
-        animation-play-state: paused;
-    }
-
-    .rc-slider-tooltip-zoom-down-leave {
-        animation-duration: .3s;
-        animation-fill-mode: both;
-        display: block !important;
-        animation-play-state: paused;
-    }
-
-    .rc-slider-tooltip-zoom-down-enter.rc-slider-tooltip-zoom-down-enter-active,
-    .rc-slider-tooltip-zoom-down-appear.rc-slider-tooltip-zoom-down-appear-active {
-        animation-name: rcSliderTooltipZoomDownIn;
-        animation-play-state: running;
-    }
-
-    .rc-slider-tooltip-zoom-down-leave.rc-slider-tooltip-zoom-down-leave-active {
-        animation-name: rcSliderTooltipZoomDownOut;
-        animation-play-state: running;
-    }
-
-    .rc-slider-tooltip-zoom-down-enter,
-    .rc-slider-tooltip-zoom-down-appear {
-        transform: scale(0, 0);
-        animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    .rc-slider-tooltip-zoom-down-leave {
-        animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-    }
-
-    @keyframes rcSliderTooltipZoomDownIn {
-        0% {
-            opacity: 0;
-            transform-origin: 50% 100%;
-            transform: scale(0, 0);
+          return true;
         }
 
-        100% {
-            transform-origin: 50% 100%;
-            transform: scale(1, 1);
+        return false;
+      }
+
+      function isset(name) {
+        return typeof this.scripts[name] !== "undefined";
+      }
+
+      function scriptJsWithContent(conten, id) {
+        const script = document.createElement("script");
+        if (id) {
+          // test que la node n'existe pas deja, si elle existe on la supprime
+          const node = document.getElementById(id);
+          if (node) {
+            node.remove();
+          }
+
+          script.id = id;
         }
-    }
-
-    @keyframes rcSliderTooltipZoomDownOut {
-        0% {
-            transform-origin: 50% 100%;
-            transform: scale(1, 1);
-        }
-
-        100% {
-            opacity: 0;
-            transform-origin: 50% 100%;
-            transform: scale(0, 0);
-        }
-    }
-
-    .rc-slider-tooltip {
-        position: absolute;
-        left: -9999px;
-        top: -9999px;
-        visibility: visible;
-        box-sizing: border-box;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    }
-
-    .rc-slider-tooltip * {
-        box-sizing: border-box;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    }
-
-    .rc-slider-tooltip-hidden {
-        display: none;
-    }
-
-    .rc-slider-tooltip-placement-top {
-        padding: 4px 0 8px 0;
-    }
-
-    .rc-slider-tooltip-inner {
-        padding: 6px 2px;
-        min-width: 24px;
-        height: 24px;
-        font-size: 12px;
-        line-height: 1;
-        color: #ffffff;
-        text-align: center;
-        text-decoration: none;
-        background-color: #6c6c6c;
-        border-radius: 6px;
-        box-shadow: 0 0 4px #d9d9d9;
-    }
-
-    .rc-slider-tooltip-arrow {
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-color: transparent;
-        border-style: solid;
-    }
-
-    .rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {
-        bottom: 4px;
-        left: 50%;
-        margin-left: -4px;
-        border-width: 4px 4px 0;
-        border-top-color: #6c6c6c;
-    }
-
-
-    .rc-slider-mark-text {
-        color: white;
-    }
-
-    .rc-slider-dot {
-        bottom: -5px;
-        width: 16px;
-        height: 16px;
-        border: 2px solid #e9e9e9;
-    }
-
-    .rc-slider-rail {
-        height: 6px;
-    }
-
-    .rc-slider-step {
-        height: 6px;
-    }
-
-    .rc-slider-handle {
-        width: 20px;
-        height: 20px;
-        margin-top: -8px;
-        margin-left: 3px;
-    }
-
-    .rc-slider-mark {
-        font-size: 14px;
-    }
-
-
-    .we-btn-group > .we-btn:focus,
-    .we-btn-group > .we-btn:active,
-    .we-btn-group > .we-btn.we-active,
-    .we-btn-group-vertical > .we-btn:focus,
-    .we-btn-group-vertical > .we-btn:active,
-    .we-btn-group-vertical > .we-btn.we-active {
-        background: rgb(93 117 160);
-    }
-
-
-    .react-tags {
-        position: relative;
-        padding: 6px 0 0 6px;
-        border: 1px solid #D1D1D1;
-        border-radius: 1px;
-        background: white;
-
-        /* shared font styles */
-        font-size: 1em;
-        line-height: 1.2;
-
-        /* clicking anywhere will focus the input */
-        cursor: text;
-    }
-
-    .react-tags.is-focused {
-        border-color: #B1B1B1;
-    }
-
-    .react-tags__selected {
-        display: inline;
-    }
-
-    .react-tags__selected-tag {
-        display: inline-block;
-        box-sizing: border-box;
-        margin: 0 6px 6px 0;
-        padding: 6px 8px;
-        border: 1px solid #D1D1D1;
-        border-radius: 2px;
-
-
-        /* match the font styles */
-        font-size: inherit;
-        line-height: inherit;
-
-        box-sizing: border-box;
-        touch-action: manipulation;
-        margin: 0;
-        font-family: inherit;
-        overflow: visible;
-        text-transform: none;
-        white-space: nowrap;
-        display: inline-block;
-        font-weight: 400;
-        text-align: center;
-        vertical-align: middle;
-        user-select: none;
-        border: 1px solid transparent;
-        padding: .375rem .75rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        border-radius: .25rem;
-        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-        -webkit-appearance: button;
-        text-decoration: none;
-        cursor: pointer;
-        background-image: none;
-        color: #fff;
-        background-color: #0062cc;
-        border-color: #005cbf;
-        margin: 1px;
-    }
-
-    .react-tags__selected-tag:after {
-        content: '\2715';
-        color: #AAA;
-        margin-left: 8px;
-    }
-
-    .react-tags__selected-tag:hover,
-    .react-tags__selected-tag:focus {
-        border-color: #B1B1B1;
-    }
-
-    .react-tags__search {
-        display: inline-block;
-
-        /* match tag layout */
-        padding: 7px 2px;
-        margin-bottom: 6px;
-
-        /* prevent autoresize overflowing the container */
-        max-width: 100%;
-    }
-
-    @media screen and (min-width: 30em) {
-
-        .react-tags__search {
-            /* this will become the offsetParent for suggestions */
-            position: relative;
-        }
-
-    }
-
-    .react-tags__search-input {
-        /* prevent autoresize overflowing the container */
-        max-width: 100%;
-
-        /* remove styles and layout from this element */
-        margin: 0;
-        padding: 0;
-        border: 0;
-        outline: none;
-
-        /* match the font styles */
-        font-size: inherit;
-        line-height: inherit;
-    }
-
-    .react-tags__search-input::-ms-clear {
-        display: none;
-    }
-
-    .react-tags__suggestions {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-    }
-
-    @media screen and (min-width: 30em) {
-
-        .react-tags__suggestions {
-            width: 240px;
-        }
-
-    }
-
-    .react-tags__suggestions ul {
-        margin: 4px -1px;
-        padding: 0;
-        list-style: none;
-        background: white;
-        border: 1px solid #D1D1D1;
-        border-radius: 2px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    }
-
-    .react-tags__suggestions li {
-        border-bottom: 1px solid #ddd;
-        padding: 6px 8px;
-    }
-
-    .react-tags__suggestions li mark {
-        text-decoration: underline;
-        background: none;
-        font-weight: 600;
-    }
-
-    .react-tags__suggestions li:hover {
-        cursor: pointer;
-        background: #eee;
-    }
-
-    .react-tags__suggestions li.is-active {
-        background: #b7cfe0;
-    }
-
-    .react-tags__suggestions li.is-disabled {
-        opacity: 0.5;
-        cursor: auto;
-    }
-
-
-    .navbar .dropdown-menu {
-        right: 0;
-        left: auto;
-    }
-
-    .we-overlay {
-        position: relative;
-    }
-
-    .we-overlay:hover > * {
-        opacity: 0.5;
-    }
-
-    .we-overlay:hover .we-overlay-body {
-        opacity: 1;
-    }
-
-    .we-overlay-body {
-        transition: 0.5s ease;
-        opacity: 0;
-        position: absolute;
-        top: -10px;
-        right: -10px;
-        bottom: -10px;
-        left: -10px;
-    }
-
-    .browser {
-        font-size: 18px;
-        height: 60px;
-        display: inline-block;
-        overflow: hidden;
-    }
-
-    .browser .browser-navigation-bar {
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        padding: 10px;
-        display: flex;
-        justify-content: space-between;
-        box-sizing: border-box;
-        height: 60px;
-        position: absolute;
-        top: 0;
-        width: 100%;
-    }
-
-
-    .browser input {
-        font-size: 0.75em;
-        vertical-align: top;
-        display: inline-block;
-        height: 40px;
-        color: #aaa;
-        width: calc(100% - 6em);
-        border: none;
-        border-radius: 19px;
-        background-color: #e8e8e8;
-        margin: auto;
-        padding: 0 0.4em;
-    }
-
-    .browser-container {
-        height: 100%;
-        width: 100%;
-        overflow-x: hidden;
-        overflow-y: auto;
-
-        text-align: center;
-    }
-
-
-    #sidebar-wrapper {
-        position: fixed;
-        right: 0;
-        top: 0;
-        bottom: 0;
-
-    }
-
-    .my-modal {
-        width: 100%;
-        height: 100%;
-        max-width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .my-modal-content {
-        box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
-        height: auto;
-        min-height: 100%;
-        border-radius: 0;
-    }
-
-
-    .btn-floating {
-        z-index: 1;
-        margin: -23px 20px;
-        margin-left: auto;
-        vertical-align: middle;
-        width: 47px;
-        height: 47px;
-        border-radius: 50% !important;
-        cursor: pointer;
-        -webkit-transition: .3s;
-        transition: .3s;
-        border: 0;
-    }
-
-    .card.narrower .card-img-top {
-        margin-left: 4%;
-        margin-right: 4%;
-        margin-top: -20px;
-        height: auto;
-        max-width: 100%;
-        width: auto;
-        border-radius: calc(.3rem - 0px);
-        /* /!\ Varaible SASS JIMAGINE */
-    }
-
-    .card.wider .card-body {
-        margin-left: 4%;
-        margin-right: 4%;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-        border: 0px solid rgba(0, 0, 0, 0.125);
-        border-bottom-right-radius: 0px;
-        border-bottom-left-radius: 0px;
-        border-bottom-right-radius: calc(.3rem - 0px);
-        border-bottom-left-radius: calc(.3rem - 0px);
-    }
-
-    .card.wider .card-img-top {
-        /* .card-content */
-        border-bottom-right-radius: calc(.3rem - 0px);
-        border-bottom-left-radius: calc(.3rem - 0px);
-    }
-
-    .card.wider {
-        box-shadow: unset;
-    }
-
-    .effect-zoom-in {
-        overflow: hidden;
-    }
-
-    .effect-zoom-in:hover img {
-        -webkit-transform: scale(1.3);
-        -ms-transform: scale(1.3);
-        transform: scale(1.3);
-    }
-
-    .effect-zoom-in img,
-    .effect-zoom-in video {
-        -webkit-transition: .3s ease-in-out;
-        transition: .3s ease-in-out;
-    }
-
-    .effect-zoom-out {
-        overflow: hidden;
-    }
-
-    .effect-zoom-out:hover img {
-        -webkit-transform: scale(1);
-        -ms-transform: scale(1);
-        transform: scale(1);
-    }
-
-    .effect-zoom-out img,
-    .effect-zoom-out video {
-        -webkit-transform: scale(1.5);
-        transform: scale(1.5);
-        -webkit-transition: .3s ease-in-out;
-        transition: .3s ease-in-out;
-    }
-
-    .card-custom-img::after {
-        position: absolute;
-        content: '';
-        top: 161px;
-        left: 0;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-top-width: 40px;
-        border-right-width: 0;
-        border-bottom-width: 0;
-        border-left-width: 545px;
-        border-left-width: calc(575px - 5vw);
-        border-top-color: transparent;
-        border-right-color: transparent;
-        border-bottom-color: transparent;
-        border-left-color: inherit;
-    }
-</style>
-
-<script type="text/javascript" src="/bundle.js"></script></body>
-
+        script.type = "text/javascript";
+        script.text = content;
+        document.getElementsByTagName("head")[0].appendChild(script);
+        return script;
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <div id="modal-sortable-tree-editor"></div>
+  </body>
 </html>
