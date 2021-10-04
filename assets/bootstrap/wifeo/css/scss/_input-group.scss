@@ -1,0 +1,176 @@
+//
+// Base styles
+//
+
+.we-input-group {
+  position: relative;
+  display: flex;
+  width: 100%;
+
+  .we-form-control {
+    // Ensure that the input is always above the *appended* addon button for
+    // proper border colors.
+    position: relative;
+    z-index: 2;
+    flex: 1 1 auto;
+    // Add width 1% and flex-basis auto to ensure that button will not wrap out
+    // the column. Applies to IE Edge+ and Firefox. Chrome does not require this.
+    width: 1%;
+    margin-bottom: 0;
+
+    // Bring the "active" form control to the front
+    @include hover-focus-active {
+      z-index: 3;
+    }
+  }
+}
+
+.we-input-group-addon,
+.we-input-group-btn,
+.we-input-group .we-form-control {
+  // Vertically centers the content of the addons within the input group
+  display: flex;
+  align-items: center;
+
+  &:not(:first-child):not(:last-child) {
+    @include border-radius(0);
+  }
+}
+
+.we-input-group-addon,
+.we-input-group-btn {
+  white-space: nowrap;
+  vertical-align: middle; // Match the inputs
+}
+
+
+// Sizing options
+//
+// Remix the default form control sizing classes into new ones for easier
+// manipulation.
+
+.we-input-group-lg > .we-form-control,
+.we-input-group-lg > .we-input-group-addon,
+.we-input-group-lg > .we-input-group-btn > .we-btn {
+  @extend .we-form-control-lg;
+}
+.we-input-group-sm > .we-form-control,
+.we-input-group-sm > .we-input-group-addon,
+.we-input-group-sm > .we-input-group-btn > .we-btn {
+  @extend .we-form-control-sm;
+}
+
+
+//
+// Text input groups
+//
+
+.we-input-group-addon {
+  padding: $input-btn-padding-y $input-btn-padding-x;
+  margin-bottom: 0; // Allow use of <label> elements by overriding our default margin-bottom
+  font-size: $font-size-base; // Match inputs
+  font-weight: $font-weight-normal;
+  line-height: $input-btn-line-height;
+  color: $input-color;
+  text-align: center;
+  background-color: $input-group-addon-bg;
+  border: $input-btn-border-width solid $input-group-addon-border-color;
+  @include border-radius($input-border-radius);
+
+  // Sizing
+  &.we-form-control-sm {
+    padding: $input-btn-padding-y-sm $input-btn-padding-x-sm;
+    font-size: $font-size-sm;
+    @include border-radius($input-border-radius-sm);
+  }
+
+  &.we-form-control-lg {
+    padding: $input-btn-padding-y-lg $input-btn-padding-x-lg;
+    font-size: $font-size-lg;
+    @include border-radius($input-border-radius-lg);
+  }
+
+  // scss-lint:disable QualifyingElement
+  // Nuke default margins from checkboxes and radios to vertically center within.
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin-top: 0;
+  }
+  // scss-lint:enable QualifyingElement
+}
+
+
+//
+// Reset rounded corners
+//
+
+.we-input-group .we-form-control:not(:last-child),
+.we-input-group-addon:not(:last-child),
+.we-input-group-btn:not(:last-child) > .we-btn,
+.we-input-group-btn:not(:last-child) > .we-btn-group > .we-btn,
+.we-input-group-btn:not(:last-child) > .we-dropdown-toggle,
+.we-input-group-btn:not(:first-child) > .we-btn:not(:last-child):not(.we-dropdown-toggle),
+.we-input-group-btn:not(:first-child) > .we-btn-group:not(:last-child) > .we-btn {
+  @include border-right-radius(0);
+}
+.we-input-group-addon:not(:last-child) {
+  border-right: 0;
+}
+.we-input-group .we-form-control:not(:first-child),
+.we-input-group-addon:not(:first-child),
+.we-input-group-btn:not(:first-child) > .we-btn,
+.we-input-group-btn:not(:first-child) > .we-btn-group > .we-btn,
+.we-input-group-btn:not(:first-child) > .we-dropdown-toggle,
+.we-input-group-btn:not(:last-child) > .we-btn:not(:first-child),
+.we-input-group-btn:not(:last-child) > .we-btn-group:not(:first-child) > .we-btn {
+  @include border-left-radius(0);
+}
+.we-form-control + .we-input-group-addon:not(:first-child) {
+  border-left: 0;
+}
+
+//
+// Button input groups
+//
+
+.we-input-group-btn {
+  position: relative;
+  // Jankily prevent input button groups from wrapping with `white-space` and
+  // `font-size` in combination with `inline-block` on buttons.
+  font-size: 0;
+  white-space: nowrap;
+
+  // Negative margin for spacing, position for bringing hovered/focused/actived
+  // element above the siblings.
+  > .we-btn {
+    position: relative;
+
+    + .we-btn {
+      margin-left: (-$input-btn-border-width);
+    }
+
+    // Bring the "active" button to the front
+    @include hover-focus-active {
+      z-index: 3;
+    }
+  }
+
+  // Negative margin to only have a single, shared border between the two
+  &:not(:last-child) {
+    > .we-btn,
+    > .we-btn-group {
+      margin-right: (-$input-btn-border-width);
+    }
+  }
+  &:not(:first-child) {
+    > .we-btn,
+    > .we-btn-group {
+      z-index: 2;
+      margin-left: (-$input-btn-border-width);
+      // Because specificity
+      @include hover-focus-active {
+        z-index: 3;
+      }
+    }
+  }
+}

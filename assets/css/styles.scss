@@ -1,0 +1,947 @@
+@import "../filterCss/instagramcss/instagram.scss";
+
+// Fichier a compiler avec live Sass Compiler sur vscode pour avoir le .css a jour pour les sites en front
+// "liveSassCompile.settings.formats": [
+//     {
+//       "format": "compressed",
+//       "extensionName": ".css",
+//       "savePath": null
+//     }
+//   ],
+// "liveSassCompile.settings.generateMap": false,
+// "liveSassCompile.settings.includeItems": [
+//     "src/assets/css/styles.scss"
+//   ],
+
+body {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+}
+
+.cursor-pt {
+    cursor: pointer;
+}
+
+.navbar {
+    .nav-link {
+        color: inherit !important;
+        opacity: 0.85;
+        &:hover,
+        &.active {
+            opacity: 1;
+        }
+    }
+}
+
+[data-rcpt="facture"] p,
+.navbar-brand p,
+[data-rcpt="facture"] .public-DraftStyleDefault-block,
+.navbar-brand .public-DraftStyleDefault-block {
+    margin-bottom: 0px !important;
+}
+
+.we-nav-pills-underline > li.we-nav-item > a.we-nav-link {
+    color: #000000;
+}
+
+.container-100 {
+    margin: 0 auto;
+    width: 100%;
+    .row {
+        margin: 0;
+    }
+}
+
+.size-bg-img {
+    height: 250px;
+}
+
+@media (min-width: 576px) {
+    .card-columns.card-columns-2 {
+        column-count: 2;
+        column-gap: 0;
+        orphans: 1;
+        widows: 1;
+    }
+}
+
+.pos-rel {
+    position: relative;
+}
+
+.shadow-none {
+    box-shadow: none;
+}
+
+.pos-abs {
+    position: absolute;
+}
+
+.r-0 {
+    right: 0;
+}
+
+.l-0 {
+    left: 0;
+}
+
+.col-cover {
+    top: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+.we-bg-cornflower-lilac {
+    background-color: #ffa8a8 !important;
+}
+
+a.we-bg-cornflower-lilac:focus,
+a.we-bg-cornflower-lilac:hover {
+    background-color: #ff7575 !important;
+}
+
+.we-bg-lavender-pink {
+    background-color: #faa2c1 !important;
+}
+
+a.we-bg-lavender-pink:focus,
+a.we-bg-lavender-pink:hover {
+    background-color: #f772a1 !important;
+}
+
+.we-bg-perfume {
+    background-color: #e599f7 !important;
+}
+
+a.we-bg-perfume:focus,
+a.we-bg-perfume:hover {
+    background-color: #d96af3 !important;
+}
+
+.we-bg-melrose {
+    background-color: #b197fc !important;
+}
+
+a.we-bg-melrose:focus,
+a.we-bg-melrose:hover {
+    background-color: #8c65fb !important;
+}
+
+.we-bg-malibu {
+    background-color: #91a7ff !important;
+}
+
+a.we-bg-malibu:focus,
+a.we-bg-malibu:hover {
+    background-color: #5e7eff !important;
+}
+
+.we-bg-malibu-sky {
+    background-color: #72c3fc !important;
+}
+
+a.we-bg-malibu-sky:focus,
+a.we-bg-malibu-sky:hover {
+    background-color: #40aefb !important;
+}
+
+.we-bg-turquoise-blue {
+    background-color: #66d9e8 !important;
+}
+
+a.we-bg-turquoise-blue:focus,
+a.we-bg-turquoise-blue:hover {
+    background-color: #3acee1 !important;
+}
+
+.we-bg-turquoise-green {
+    background-color: #63e6be !important;
+}
+
+a.we-bg-turquoise-green:focus,
+a.we-bg-turquoise-green:hover {
+    background-color: #37dfac !important;
+}
+
+.we-bg-granny-smith-apple {
+    background-color: #8ce99a !important;
+}
+
+a.we-bg-granny-smith-apple:focus,
+a.we-bg-granny-smith-apple:hover {
+    background-color: #61e174 !important;
+}
+
+.we-bg-gossip {
+    background-color: #d8f5a2 !important;
+}
+
+a.we-bg-gossip:focus,
+a.we-bg-gossip:hover {
+    background-color: #c5f074 !important;
+}
+
+.we-bg-picasso {
+    background-color: #ffec99 !important;
+}
+
+a.we-bg-picasso:focus,
+a.we-bg-picasso:hover {
+    background-color: #ffe366 !important;
+}
+
+.we-bg-navajo-white {
+    background-color: #ffd8a8 !important;
+}
+
+a.we-bg-navajo-white:focus,
+a.we-bg-navajo-white:hover {
+    background-color: #ffc175 !important;
+}
+
+.btn-link {
+    cursor: pointer;
+}
+
+.card-default {
+    // background-color: transparent !important;
+}
+
+@media (max-width: 991px) {
+    .blog-image {
+        height: 140px;
+        margin-bottom: 2rem;
+    }
+    .card-default {
+        width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .blog-image {
+        height: 100%;
+        min-height: 200px;
+    }
+    .card-default {
+        width: 50%;
+    }
+}
+
+[data-item="gallery"] img {
+    cursor: pointer;
+}
+
+// etrange espacement de 9px~ en dessus du carousel
+.slick-list {
+    margin-bottom: -9px !important;
+}
+
+.slick-thumbnail {
+    display: block;
+    img {
+        display: block;
+        box-shadow: 0 0 5px rgba(51, 51, 51, 0.45);
+        width: 9vh;
+        height: 9vh;
+        object-fit: cover;
+    }
+}
+
+.variable-width .slick-slide p {
+    background: blue;
+    height: 100px;
+    color: #fff;
+    margin: 5px;
+    line-height: 100px;
+    text-align: center;
+}
+
+.center .slick-center h3 {
+    color: #e67e22;
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+.center h3 {
+    opacity: 0.8;
+    transition: all 300ms ease;
+}
+
+.content {
+    padding: 20px;
+    margin: auto;
+    width: 90%;
+}
+
+.slick-slide .image {
+    padding: 10px;
+}
+
+.slick-slide img {
+    border: 5px solid #fff;
+    display: block;
+    margin: auto;
+}
+
+.slick-slide img.slick-loading {
+    border: 0;
+}
+
+.slick-dots {
+    margin-left: 0;
+    white-space: nowrap;
+    overflow: auto;
+    bottom: 0 !important;
+}
+
+.slick-thumb {
+    bottom: -45px;
+}
+
+.slick-thumb li {
+    width: 60px;
+    height: 45px;
+}
+
+.slick-thumbnails-filter .slick-thumb li img,
+.slick-thumbnails-filter .slick-dots li a {
+    filter: grayscale(100%);
+}
+
+.slick-thumb li.slick-active img,
+.slick-dots li.slick-active a {
+    filter: grayscale(0%);
+}
+
+@media (max-width: 768px) {
+    .center {
+        margin-left: -40px;
+        margin-right: -40px;
+    }
+    .center .slick-center h3 {
+        color: #e67e22;
+        opacity: 1;
+        transform: scale(1);
+    }
+    .center h3 {
+        opacity: 0.8;
+        transform: scale(0.95);
+        transition: all 300ms ease;
+    }
+}
+
+.slick-vertical .slick-slide {
+    height: 180px;
+}
+
+/* .slick-arrow { */
+
+/* background-color: grey; */
+
+/* color: black; */
+
+/* } */
+
+.slick-arrow:hover {
+    /* background-color: grey; */
+    /* background-color: initial;
+   color: inherit; */
+    box-shadow: 0 0 5px rgba(51, 51, 51, 0.568);
+}
+
+.slick-prev {
+    z-index: 1;
+    left: 20px !important;
+}
+
+.slick-next {
+    z-index: 1;
+    right: 20px !important;
+}
+
+.slick-hide-btn.slick-prev:before,
+.slick-hide-btn.slick-next:before {
+    visibility: hidden;
+}
+
+.slick-dots li {
+    height: unset !important;
+    width: unset !important;
+}
+
+.slick-thumb {
+    position: relative !important;
+}
+
+.slick-active .slick-dots-hyphen,
+.slick-active .slick-dots-normal {
+    background-color: #fff;
+}
+
+.slick-dots-hyphen {
+    position: relative;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    width: 30px;
+    height: 3px;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 5px #737373;
+}
+
+.slick-dots-normal {
+    position: relative;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 5px #737373;
+}
+
+.slick-track {
+    display: flex;
+    position: absolute !important;
+    .slick-slide {
+        display: flex;
+        height: auto;
+        align-items: center; // optional
+        justify-content: center; // optional
+    }
+}
+
+.slick-slide img {
+    border: 0 !important;
+}
+
+// Utile pour avoir l'index quand on clique sur une slide, sinon ca sera toujours la derniere...
+.slick-slide:not(.slick-active) .slide-media {
+    display: none !important;
+}
+
+.slick-slide-custom {
+    text-shadow: rgb(0, 0, 0) 0px 0px 5px !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
+    width: 80px !important;
+}
+
+.slick-slide-custom.slick-next {
+    right: 0px !important;
+}
+
+.slick-slide-custom.slick-prev {
+    left: 0px !important;
+}
+
+/* .slick-arrow { */
+/* background-color: grey; */
+/* color: black; */
+/* } */
+// .slick-arrow:hover {
+/* background-color: grey; */
+/* background-color: initial;
+   color: inherit; */
+// box-shadow: 0 0 5px rgba(51, 51, 51, 0.568);
+// }
+
+footer .flex-column .footer-item {
+    margin: 0.6rem auto 0.6rem;
+}
+
+footer p {
+    margin: 0 !important;
+}
+
+nav p {
+    white-space: normal;
+}
+
+footer .bg-dark a {
+    color: var(--white);
+}
+
+footer .bg-light a {
+    color: var(--black);
+}
+
+footer .bg-primary a {
+    color: var(--secondary);
+}
+
+flex-fill-custom {
+    flex: 1 1 auto !important;
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    vertical-align: middle;
+    overflow: hidden;
+}
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.svg-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    @media (min-width: 992px) {
+        height: 70px;
+    }
+}
+.svg-header {
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    margin-top: -30px;
+    @media (min-width: 992px) {
+        height: 70px;
+        margin-top: -69px; // on a -1px pour la section carousel qui merde au niveau du height
+    }
+}
+
+.card-header p {
+    margin-bottom: 0 !important;
+}
+
+.svg__deco-layer {
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+section:hover .svg__deco-layer--1 {
+    -webkit-transform: translate3d(15px, 0, 0);
+    transform: translate3d(15px, 0, 0);
+}
+
+section:hover .svg__deco-layer--2 {
+    -webkit-transform: translate3d(-15px, 0, 0);
+    transform: translate3d(-15px, 0, 0);
+}
+
+h1 {
+    min-width: 2.5rem;
+}
+
+h2 {
+    min-width: 2rem;
+}
+
+h3 {
+    min-width: 1.75rem;
+}
+
+.navbar .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+.nuggets {
+    width: 100%;
+}
+
+.reset-btn,
+.reset-btn:hover {
+    outline: none;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    box-shadow: unset !important;
+}
+
+// IN PROGRESS
+// todo tout le css de slick devrais etre dans le component
+.slick-animation {
+    margin-bottom: -6px;
+    img {
+        transition: all 1s ease-in-out;
+    }
+    &[data-animation="zoomIn"] {
+        img {
+            transform: scale(1);
+        }
+        .slick-active img {
+            transform: scale(1.1);
+        }
+    }
+    &[data-animation="zoomOut"] {
+        img {
+            transform: scale(1.2);
+        }
+        .slick-active img {
+            transform: scale(1);
+        }
+    }
+    &[data-animation="stretching"] {
+        img {
+            transform: scale(1, 0);
+            opacity: 0;
+        }
+        .slick-active img {
+            opacity: 1;
+            transform: scale(1, 1);
+        }
+    }
+    &[data-animation="fromBottom"] {
+        img {
+            transform: scale(0, 0);
+            transform-origin: bottom;
+        }
+        .slick-active img {
+            transform: scale(1, 1);
+            transform-origin: top;
+        }
+    }
+    // &[data-animation="noname"] {
+    //     img {
+    //         transform: scaleZ(2) rotateY(45deg);
+    //     }
+    //     .slick-active img {
+    //         transform: scaleZ(1) rotateY(0deg);
+    //     }
+    // }
+}
+
+.navbar__logo {
+    height: auto;
+    width: auto;
+    max-height: 50px;
+    max-width: 300px;
+}
+
+.footer__logo {
+    max-height: 100px;
+}
+
+.inline-media-btns {
+    a {
+        margin: 0.25rem 0rem;
+        margin-right: 0.5rem;
+    }
+}
+
+.bg-black {
+    background-color: #000000;
+}
+
+// PHOTOSWIPE
+.pswp__button {
+    display: block;
+    color: white;
+    font-weight: 900; // .fas
+    font-family: "Font Awesome 5 Pro", "Font Awesome 5 Free";
+    &.pswp__button--close::before {
+        content: "\f00d"; // .fa-times
+    }
+    &.pswp__button--share::before {
+        content: "\f14d"; // .fa-share-square
+    }
+    &.pswp__button--fs::before {
+        content: "\f065"; // .fa-expand
+    }
+    &.pswp__button--zoom::before {
+        content: "\f00e"; // .fa-search-plus
+    }
+    &.pswp__button--share::before {
+        content: "\f14d"; // .fa-share-square
+    }
+    &.pswp__button--arrow--right::before {
+        content: "\f061"; // .fa-arrow-right
+        padding-top: 3px;
+    }
+    &.pswp__button--arrow--left::before {
+        content: "\f060"; // .fa-arrow-left
+        padding-top: 3px;
+    }
+}
+
+.pswp--zoomed-in {
+    .pswp__button--zoom::before {
+        content: "\f010"; // .fa-search-minus
+    }
+}
+
+.pswp--fs {
+    .pswp__button--fs::before {
+        content: "\f066"; // .fa-compress
+    }
+}
+
+// MEDIA LIB
+.imageLibrary {
+    .we-rounded-circle,
+    img {
+        cursor: pointer;
+    }
+}
+
+/* Pour garder les espaces quand on cree du text avec draftJS */
+section {
+    h1,
+    h2,
+    h3,
+    p {
+        white-space: pre-wrap;
+    }
+}
+
+// requis pour les textes convertie par draft js
+h1,
+h2,
+h3 {
+    min-height: 2rem; // depend de line-height du body
+}
+p {
+    min-height: 1.5rem; // depend de line-height du body
+}
+
+// Supprime la couleur d'un lien <a> ayant pour enfant une card
+.link-on-card {
+    color: unset;
+}
+
+// main[editor-typologie="col2"]:not([in-edit="true"]) {
+//     footer {
+//         position: fixed;
+//         bottom: 0;
+//         right: 0;
+//         width: 100%;
+//     }
+// }
+
+.aside-left {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    // right: 0px;
+    bottom: auto;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
+
+@media (min-width: 768px) {
+    .layout-sidebar {
+        margin-left: 235px; // taille de la sidebar
+    }
+    .aside-left {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 235px !important;
+        .we-section-editable {
+            // width: 230px;
+        }
+    }
+}
+
+@media (max-width: 769px) {
+    .aside-left {
+        margin-left: 0px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    main[sidebar-open="true"] {
+        .sidebar-navigation {
+            margin-left: 322px;
+        }
+    }
+    main[sidebar-open="false"] {
+        .sidebar-navigation {
+            // margin-left: 50px;
+        }
+    }
+    .sidebar-navigation {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        bottom: 0px;
+        width: 235px;
+        height: 100%;
+        background-color: #fff;
+        box-shadow: 1px 1px 1px 0 rgba(11, 94, 115, 0.1);
+        transition: left 0.1s;
+    }
+    .we-editor {
+        .sidebar-navigation {
+            transition: margin-left 0.1s;
+            margin-top: 54px;
+        }
+        section[data-tpl="Tpl04"] {
+            .navbar-collapse {
+                margin-bottom: 54px;
+            }
+        }
+    }
+}
+
+// ajout spacer bootstrap
+$spacer: 1rem !default;
+$spacers: (
+    6: (
+        $spacer * 4.5
+    ),
+    7: (
+        $spacer * 5.5
+    ),
+    8: (
+        $spacer * 6.5
+    ),
+    9: (
+        $spacer * 7.5
+    ),
+    10: (
+        $spacer * 8.5
+    )
+) !default;
+@each $prop, $abbrev in (margin: m, padding: p) {
+    @each $size, $length in $spacers {
+        .#{$abbrev}-#{$size} {
+            #{$prop}: $length !important;
+        }
+        .#{$abbrev}t-#{$size} {
+            #{$prop}-top: $length !important;
+        }
+        .#{$abbrev}r-#{$size} {
+            #{$prop}-right: $length !important;
+        }
+        .#{$abbrev}b-#{$size} {
+            #{$prop}-bottom: $length !important;
+        }
+        .#{$abbrev}l-#{$size} {
+            #{$prop}-left: $length !important;
+        }
+        .#{$abbrev}x-#{$size} {
+            #{$prop}-right: $length !important;
+            #{$prop}-left: $length !important;
+        }
+        .#{$abbrev}y-#{$size} {
+            #{$prop}-top: $length !important;
+            #{$prop}-bottom: $length !important;
+        }
+    }
+}
+// Pour contenir les svg
+section[type-section] {
+    position: relative;
+}
+
+// section[type-section="slick-carousel"] {
+//     margin-bottom: 6px;
+// }
+
+// Pour pas que les colonnes ne se collent quand elles se stack
+// probleme quand on as 4 elements dans une row avec col-md-4, la derniere sera collé...
+// avorted
+// @media (max-width: 767px) {
+// [class*="col-"]:not(:first-child) {
+// margin-top: 1.5rem;
+// }
+// }
+
+.container-editor-text img[style*="float:none"] {
+    display: block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+// z index si jamais une modal (reactjs-popup) est afficher dedans (modal login par exemple)
+.aside-left {
+    z-index: 1;
+}
+
+.dataTables_filter {
+    display: none;
+}
+
+// Pour cacher le caret ajouté par le theme material
+select.form-control,
+select.form-control:focus,
+select:focus {
+    background-image: none !important;
+}
+
+// // Pour pouvoir scroller les modals qui ont trop de contenu
+// .modal-scrollable-content {
+//     &.we-modal-dialog {
+//         overflow-y: initial !important;
+//     }
+//     .content-scrollable {
+//         overflow-y: auto;
+//         overflow-x: hidden;
+//         padding: 0.2rem 1rem; // pour qu'on est de l'espace pour la scrollbar et eviter que l'ui bouge/soit caché
+//     }
+// }
+
+.wrapper-stars i {
+    color: #ffa000;
+}
+
+.slick-slide {
+    .card-img {
+        border-radius: unset;
+    }
+}
+
+// Form rcpt
+div.field-error.has-error.has-danger .form-control {
+    border-color: var(--danger);
+    border-width: 1px;
+}
+// Form rcpt
+
+.logo-wifeo {
+    font-family: "Dosis", sans-serif;
+    font-size: 29px;
+    color: #333d4f;
+}
+
+// Btn de partage fiche produit
+// rcpt social share
+.SocialMediaBtn-Custom {
+    cursor: pointer;
+}
+
+// simplex ajoute une bordure..
+.navbar {
+    border: none !important;
+}
+
+// ---- SHAPE BTN
+.cfg-btn-square {
+    border-radius: 0px !important;
+}
+.cfg-btn-round {
+    border-radius: 4px !important;
+}
+.cfg-btn-oval {
+    border-radius: 40px !important;
+}
+//  SHAPE BTN ----

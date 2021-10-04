@@ -1,0 +1,198 @@
+// scss-lint:disable QualifyingElement
+
+// Make the div behave like a button
+.we-btn-group,
+.we-btn-group-vertical {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle; // match .we-btn alignment given font-size hack above
+
+  > .we-btn {
+    position: relative;
+    flex: 0 1 auto;
+    margin-bottom: 0;
+
+    // Bring the hover, focused, and "active" buttons to the front to overlay
+    // the borders properly
+    @include hover {
+      z-index: 2;
+    }
+    &:focus,
+    &:active,
+    &.we-active {
+      z-index: 2;
+    }
+  }
+
+  // Prevent double borders when buttons are next to each other
+  .we-btn + .we-btn,
+  .we-btn + .we-btn-group,
+  .we-btn-group + .we-btn,
+  .we-btn-group + .we-btn-group {
+    margin-left: -$input-btn-border-width;
+  }
+}
+
+// Optional: Group multiple button groups together for a toolbar
+.we-btn-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .we-input-group {
+    width: auto;
+  }
+}
+
+.we-btn-group > .we-btn:not(:first-child):not(:last-child):not(.we-dropdown-toggle) {
+  border-radius: 0;
+}
+
+// Set corners individual because sometimes a single button can be in a .we-btn-group and we need :first-child and :last-child to both match
+.we-btn-group > .we-btn:first-child {
+  margin-left: 0;
+
+  &:not(:last-child):not(.we-dropdown-toggle) {
+    @include border-right-radius(0);
+  }
+}
+// Need .we-dropdown-toggle since :last-child doesn't apply given a .we-dropdown-menu immediately after it
+.we-btn-group > .we-btn:last-child:not(:first-child),
+.we-btn-group > .we-dropdown-toggle:not(:first-child) {
+  @include border-left-radius(0);
+}
+
+// Custom edits for including btn-groups within btn-groups (useful for including dropdown buttons within a btn-group)
+.we-btn-group > .we-btn-group {
+  float: left;
+}
+.we-btn-group > .we-btn-group:not(:first-child):not(:last-child) > .we-btn {
+  border-radius: 0;
+}
+.we-btn-group > .we-btn-group:first-child:not(:last-child) {
+  > .we-btn:last-child,
+  > .we-dropdown-toggle {
+    @include border-right-radius(0);
+  }
+}
+.we-btn-group > .we-btn-group:last-child:not(:first-child) > .we-btn:first-child {
+  @include border-left-radius(0);
+}
+
+
+// Sizing
+//
+// Remix the default button sizing classes into new ones for easier manipulation.
+
+.we-btn-group-sm > .we-btn { @extend .we-btn-sm; }
+.we-btn-group-lg > .we-btn { @extend .we-btn-lg; }
+
+
+//
+// Split button dropdowns
+//
+
+.we-btn + .we-dropdown-toggle-split {
+  padding-right: $input-btn-padding-x * .75;
+  padding-left: $input-btn-padding-x * .75;
+
+  &::after {
+    margin-left: 0;
+  }
+}
+
+.we-btn-sm + .we-dropdown-toggle-split {
+  padding-right: $input-btn-padding-x-sm * .75;
+  padding-left: $input-btn-padding-x-sm * .75;
+}
+
+.we-btn-lg + .we-dropdown-toggle-split {
+  padding-right: $input-btn-padding-x-lg * .75;
+  padding-left: $input-btn-padding-x-lg * .75;
+}
+
+
+// The clickable button for toggling the menu
+// Set the same inset shadow as the :active state
+.we-btn-group.we-show .we-dropdown-toggle {
+  @include box-shadow($btn-active-box-shadow);
+
+  // Show no shadow for `.we-btn-link` since it has no other button styles.
+  &.we-btn-link {
+    @include box-shadow(none);
+  }
+}
+
+
+//
+// Vertical button groups
+//
+
+.we-btn-group-vertical {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  .we-btn,
+  .we-btn-group {
+    width: 100%;
+  }
+
+  > .we-btn + .we-btn,
+  > .we-btn + .we-btn-group,
+  > .we-btn-group + .we-btn,
+  > .we-btn-group + .we-btn-group {
+    margin-top: -$input-btn-border-width;
+    margin-left: 0;
+  }
+}
+
+.we-btn-group-vertical > .we-btn {
+  &:not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+  &:first-child:not(:last-child) {
+    @include border-bottom-radius(0);
+  }
+  &:last-child:not(:first-child) {
+    @include border-top-radius(0);
+  }
+}
+.we-btn-group-vertical > .we-btn-group:not(:first-child):not(:last-child) > .we-btn {
+  border-radius: 0;
+}
+.we-btn-group-vertical > .we-btn-group:first-child:not(:last-child) {
+  > .we-btn:last-child,
+  > .we-dropdown-toggle {
+    @include border-bottom-radius(0);
+  }
+}
+.we-btn-group-vertical > .we-btn-group:last-child:not(:first-child) > .we-btn:first-child {
+  @include border-top-radius(0);
+}
+
+
+// Checkbox and radio options
+//
+// In order to support the browser's form validation feedback, powered by the
+// `required` attribute, we have to "hide" the inputs via `clip`. We cannot use
+// `display: none;` or `visibility: hidden;` as that also hides the popover.
+// Simply visually hiding the inputs via `opacity` would leave them clickable in
+// certain cases which is prevented by using `clip` and `pointer-events`.
+// This way, we ensure a DOM element is visible to position the popover from.
+//
+// See https://github.we-com/twbs/bootstrap/pull/12794 and
+// https://github.we-com/twbs/bootstrap/pull/14559 for more information.
+
+[data-toggle="buttons"] {
+  > .we-btn,
+  > .we-btn-group > .we-btn {
+    input[type="radio"],
+    input[type="checkbox"] {
+      position: absolute;
+      clip: rect(0,0,0,0);
+      pointer-events: none;
+    }
+  }
+}

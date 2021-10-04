@@ -1,288 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Wifeo React Editor</title>
-
-    <script>
-      window.__ENV_MODE = Object.freeze({
-        production: false,
-        subdomain: "",
-        domainApi: "",
-        scheme: "https",
-        domain: "epicblue.fr",
-        // Utiliser les cdn de dev ou prod
-        reactProd: false,
-        // utilise le domain amazon ou non ()
-        apiProd: false,
-        pathApps: "admin.epicblue.fr",
-        // chemin du front pour réserver un nom de domaine
-        pathToBuyDomain: "domaines",
-        pathToBuyPlans: "offres",
-        pathParent: null,
-        cdnPath:
-          "https://c615ced19183d07ecc18be0ff9962b7-lx4pa.ondigitalocean.app/editor",
-        // Pour la page dashboard/facturation
-        uidPaiementWifeosite: {
-          distant_id: 7,
-          uid: "832D00A7-4E51-4438-8754-3BE4F30C3F34",
-        },
-        // version des fichiers statics, pour forcer le rafraichement des fichiers apres une maj
-        // correspond a Date.now()
-        //versionFiles: "0.0.0",
-        versionFiles:
-          "https://c615ced19183d07ecc18be0ff9962b7-lx4pa.ondigitalocean.app/editor/check.js",
-        hostWifeoCms: "www.wifeocms.com",
-      });
-    </script>
-
-
-    <script>
-      scriptsStore = Object.freeze([
-        {
-          name: "bundle",
-          src: "bundle.js",
-          integrity: "",
-          external: false,
-        },
-        {
-          name: "react",
-          src: "https://unpkg.com/react@16/umd/react.development.js",
-          integrity: "",
-          external: true,
-        },
-        {
-          name: "reactDom",
-          integrity: "",
-          src: "https://unpkg.com/react-dom@16/umd/react-dom.development.js",
-          external: true,
-        },
-      ]);
-
-      scripts = [];
-
-      scriptsStore.forEach((script) => {
-        scripts[script.name] = {
-          loaded: false,
-          src: script.src,
-          id: script.id,
-          dependencies: script.dependencies || [],
-          type: script.type || "js",
-          name: script.name,
-          external: script.external,
-        };
-      });
-
-     
-
-      function getVersionNumber() {
-
-        /// GET REQUEST on --> window.__ENV_MODE.versionFiles
-
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            resolve("1.0.0");
-          }, 2000);
-        });
-
-        //reject("0.0.0");
-
-      }
-
-      getVersionNumber().then((numVersion) => {
-        console.log("num:", numVersion);
-        load("js", ["react", "reactDom", "bundle"], numVersion)
-          .then((data) => {
-            console.log("On a charge l'app avec son num version");
-          })
-          .catch((c) => {
-            console.log("les choses ont mal tournées", c);
-          });
-      });
-
-      function getVersionFiles(script, numVersion) {
-        console.log("script version :", script.name, script.versioning, script);
-        if (script.external) {
-          return script.src;
-        } else {
-          return (
-            window.__ENV_MODE.cdnPath + "/" + numVersion + "/" + script.src
-          );
-        }
-      }
-
-      function load(type, scripts, numVersion) {
-        const promises = [];
-        scripts.forEach((script) =>
-          promises.push(this.loadScript(type, script, numVersion))
-        );
-        return Promise.all(promises);
-      }
-
-      function loadScript(type, name, numVersion) {
-        return new Promise((resolve, reject) => {
-          if (!scripts[name]) {
-            console.error("the script " + name + " isn't in the registry");
-            return;
-          }
-          // resolve if already loaded
-          if (scripts[name].loaded) {
-            const id = this.scripts[name].id;
-            resolve({
-              script: name,
-              loaded: true,
-              status: "Already Loaded",
-              id,
-            });
-          } else {
-            // load script
-            const { id, text } = scripts[name];
-            const script =
-              type === "css"
-                ? this.scriptCss(name, id, text, numVersion)
-                : this.scriptJs(name, id, text, numVersion);
-            if (script.readyState) {
-              // IE
-              script.onreadystatechange = () => {
-                if (
-                  script.readyState === "loaded" ||
-                  script.readyState === "complete"
-                ) {
-                  script.onreadystatechange = null;
-                  this.scripts[name].loaded = true;
-                  resolve({
-                    script: name,
-                    loaded: true,
-                    status: "Loaded",
-                    id,
-                  });
-                }
-              };
-            } else {
-              // Others
-              script.onload = () => {
-                this.scripts[name].loaded = true;
-                resolve({
-                  script: name,
-                  loaded: true,
-                  status: "Loaded",
-                  id,
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"/><title>Wifeo</title><base href="/"/><!-- logo Wifeo --><link href="https://fonts.googleapis.com/css?family=Dosis:700|Open+Sans" rel="stylesheet"/><!-- <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans"
+            rel="stylesheet"
+        /> --><meta name="viewport" content="width=device-width,initial-scale=1"/><!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> --><!--     <link rel="stylesheet" type="text/css" charset="UTF-8"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" /> --><script src="https://apis.google.com/js/platform.js" async defer="defer"></script><!-- Google Tag Manager --><script>(function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    "gtm.start": new Date().getTime(),
+                    event: "gtm.js",
                 });
-              };
-            }
-            script.onerror = (error) =>
-              resolve({ script: name, loaded: false, status: "Loaded" });
-            document.getElementsByTagName("head")[0].appendChild(script);
-          }
-        });
-      }
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != "dataLayer" ? "&l=" + l : "";
+                j.async = true;
+                j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, "script", "dataLayer", "GTM-MN23KFG");</script><!-- End Google Tag Manager --><link href="https://cdn-app-wifeosite.fra1.digitaloceanspaces.com/dashboard/1.0.0/styles.bundle.css" rel="stylesheet"/></head><body><app-root></app-root><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN23KFG" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/fr.min.js" integrity="sha512-RAt2+PIRwJiyjWpzvvhKAG2LEdPpQhTgWfbEkFDCo8wC4rFYh5GQzJBVIFDswwaEDEYX16GEE/4fpeDNr7OIZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script><!-- CDN Lib Required --><script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script><script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/><script type="text/javascript" src="https://cdn-app-wifeosite.fra1.digitaloceanspaces.com/wifeolib/1.0.0/bootstrap-wifeo.min.js?ver=1.0.0.0"></script><link rel="stylesheet" href="https://cdn-app-wifeosite.fra1.digitaloceanspaces.com/wifeolib/1.0.0/fontawesome/css/all.min.css"/><link type="text/css" rel="stylesheet" href="https://cdn-app-wifeosite.fra1.digitaloceanspaces.com/wifeolib/1.0.0/global.css"/><script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script><script type="text/javascript" src="https://cdn-app-wifeosite.fra1.digitaloceanspaces.com/wifeolib/1.0.0/lib.js"></script><script>$(function () {
+                $('[data-toggle="wePopover"]').wePopover();
+                // $('[data-toggle="tooltip"]').tooltip();
 
-      function loader(...scripts) {
-        const promises = [];
-        scripts.forEach((script) => {
-          if (scripts[script]) {
-            const type = scripts[script].type;
-            promises.push(this.loadScript(type, script));
-          }
-        });
-        return Promise.all(promises);
-      }
+                var bearer = localStorage.getItem("currentUser")
+                    ? "Bearer " + localStorage.getItem("currentUser")
+                    : "";
 
-      function scriptJs(name, id, text, numVersion) {
-        const script = document.createElement("script");
-        if (id) {
-          script.id = id;
-        }
-        if (text) {
-          script.text = text;
-        }
-        script.type = "text/javascript";
-        script.src = this.getVersionFiles(this.scripts[name], numVersion);
-        return script;
-      }
+                axios.defaults.headers.common["Authorization"] = bearer;
 
-      function scriptCss(name, id, text, numVersion) {
-        const script = document.createElement("link");
-        if (id) {
-          script.id = id;
-        }
-        if (text) {
-          script.text = text;
-        }
-        script.type = "text/css";
-        script.rel = "stylesheet";
-        script.href = this.getVersionFiles(scripts[name], numVersion);
-        return script;
-      }
-
-      function getScripts() {
-        return scripts;
-      }
-
-      function getScriptByName(name) {
-        return scripts[name];
-      }
-
-      function addScript(script, replace = false) {
-        if (!scripts[script.name] || replace) {
-          scripts[script.name] = script;
-          return true;
-        }
-        return false;
-      }
-
-      function removeScript(name, keepNode = true, keepInStore) {
-        if (this.scripts[name]) {
-          if (!keepNode) {
-            const curThemeNode = document.getElementById(this.scripts[name].id);
-            if (curThemeNode) {
-              curThemeNode.remove();
-            }
-          }
-
-          if (keepInStore) {
-            this.scripts[name].loaded = false;
-          } else {
-            delete this.scripts[name];
-          }
-
-          return true;
-        }
-
-        return false;
-      }
-
-      function isset(name) {
-        return typeof this.scripts[name] !== "undefined";
-      }
-
-      function scriptJsWithContent(conten, id) {
-        const script = document.createElement("script");
-        if (id) {
-          // test que la node n'existe pas deja, si elle existe on la supprime
-          const node = document.getElementById(id);
-          if (node) {
-            node.remove();
-          }
-
-          script.id = id;
-        }
-        script.type = "text/javascript";
-        script.text = content;
-        document.getElementsByTagName("head")[0].appendChild(script);
-        return script;
-      }
-    </script>
-  </head>
-
-  <body>
-    <div id="root"></div>
-    <div id="modal-sortable-tree-editor"></div>
-  </body>
-</html>
+                $.ajaxSetup({
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", bearer);
+                    },
+                    ajaxError: function () {
+                        // console.log("pouete");
+                    },
+                });
+            });</script><script type="text/javascript" src="https://cdn-app-wifeosite.fra1.digitaloceanspaces.com/dashboard/1.0.0/inline.bundle.js"></script><script type="text/javascript" src="https://cdn-app-wifeosite.fra1.digitaloceanspaces.com/dashboard/1.0.0/polyfills.bundle.js"></script><script type="text/javascript" src="https://cdn-app-wifeosite.fra1.digitaloceanspaces.com/dashboard/1.0.0/main.bundle.js"></script></body></html>

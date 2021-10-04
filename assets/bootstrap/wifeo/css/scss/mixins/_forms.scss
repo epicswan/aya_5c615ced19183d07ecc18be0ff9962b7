@@ -1,0 +1,81 @@
+// Form control focus state
+//
+// Generate a customized focus state and for any input with the specified color,
+// which defaults to the `@input-border-color-focus` variable.
+//
+// We highly encourage you to not customize the default value, but instead use
+// this to tweak colors on an as-needed basis. This aesthetic change is based on
+// WebKit's default styles, but applicable to a wider range of browsers. Its
+// usability and accessibility should be taken into account with any change.
+//
+// Example usage: change the default blue border and shadow to white for better
+// contrast against a dark gray background.
+@mixin form-control-focus() {
+  &:focus {
+    color: $input-focus-color;
+    background-color: $input-focus-bg;
+    border-color: $input-focus-border-color;
+    outline: none;
+    @include box-shadow($input-focus-box-shadow);
+  }
+}
+
+
+@mixin form-validation-state($state, $color) {
+
+  .we-form-control,
+  .we-custom-select {
+    .we-was-validated &:#{$state},
+    &.we-is-#{$state} {
+      border-color: $color;
+
+      &:focus {
+        box-shadow: 0 0 0 .2rem rgba($color,.25);
+      }
+
+      ~ .we-invalid-feedback,
+      ~ .we-invalid-tooltip {
+        display: block;
+      }
+    }
+  }
+
+
+  // TODO: redo check markup lol crap
+  .we-form-check-input {
+    .we-was-validated &:#{$state},
+    &.we-is-#{$state} {
+      + .we-form-check-label {
+        color: $color;
+      }
+    }
+  }
+
+  // custom radios and checks
+  .we-custom-control-input {
+    .we-was-validated &:#{$state},
+    &.we-is-#{$state} {
+      ~ .we-custom-control-indicator {
+        background-color: rgba($color, .25);
+      }
+      ~ .we-custom-control-description {
+        color: $color;
+      }
+    }
+  }
+
+  // custom file
+  .we-custom-file-input {
+    .we-was-validated &:#{$state},
+    &.we-is-#{$state} {
+      ~ .we-custom-file-control {
+        border-color: $color;
+
+        &::before { border-color: inherit; }
+      }
+      &:focus {
+        box-shadow: 0 0 0 .2rem rgba($color,.25);
+      }
+    }
+  }
+}
