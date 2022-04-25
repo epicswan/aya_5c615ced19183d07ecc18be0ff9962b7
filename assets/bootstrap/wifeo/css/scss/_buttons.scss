@@ -1,0 +1,166 @@
+// scss-lint:disable QualifyingElement
+
+//
+// Base styles
+//
+
+.we-btn {
+    display: inline-block;
+    font-weight: $btn-font-weight;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: $input-btn-border-width solid transparent;
+    @include button-size(
+        $input-btn-padding-y,
+        $input-btn-padding-x,
+        $font-size-base,
+        $input-btn-line-height,
+        $btn-border-radius
+    );
+    @include transition($btn-transition);
+    box-shadow: $btn-box-shadow;
+
+    // Share hover and focus styles
+    @include hover-focus {
+        text-decoration: none;
+        cursor: pointer;
+        //nouveau
+        box-shadow: $btn-focus-box-shadow;
+        transform: translate(0, -1px);
+    }
+    &:focus,
+    &.we-focus {
+        outline: 0;
+        //nouveau
+        box-shadow: $btn-focus-box-shadow;
+        transform: translate(0, -1px);
+    }
+
+    // Disabled comes first so active can properly restyle
+    &.we-disabled,
+    &:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+        @include box-shadow(none);
+    }
+
+    &:active,
+    &.we-active {
+        background-image: none;
+        @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
+        transform: translate(0, 1px);
+    }
+}
+
+// Future-proof disabling of clicks on `<a>` elements
+a.we-btn.we-disabled,
+fieldset[disabled] a.we-btn {
+    pointer-events: none;
+}
+
+//
+// Alternate buttons
+//
+
+@each $color, $value in $theme-colors {
+    .we-btn-#{$color} {
+        @include button-variant($value, $value);
+    }
+}
+
+@each $color, $value in $theme-colors {
+    .we-btn-outline-#{$color} {
+        @include button-outline-variant($value, #fff);
+    }
+}
+
+//
+// Link buttons
+//
+
+// Make a button look and behave like a link
+.we-btn-link {
+    font-weight: $font-weight-normal;
+    color: $link-color;
+    border-radius: 0;
+
+    &,
+    &:active,
+    &.we-active,
+    &:disabled {
+        background-color: transparent;
+        @include box-shadow(none);
+    }
+    &,
+    &:focus,
+    &:active {
+        border-color: transparent;
+        box-shadow: none;
+    }
+    @include hover {
+        border-color: transparent;
+    }
+    @include hover-focus {
+        color: $link-hover-color;
+        text-decoration: $link-hover-decoration;
+        background-color: transparent;
+        //nouveau
+        box-shadow: none;
+    }
+    &:disabled {
+        color: $btn-link-disabled-color;
+
+        @include hover-focus {
+            text-decoration: none;
+        }
+    }
+}
+
+//
+// Button Sizes
+//
+
+.we-btn-lg {
+    @include button-size(
+        $input-btn-padding-y-lg,
+        $input-btn-padding-x-lg,
+        $font-size-lg,
+        $line-height-lg,
+        $btn-border-radius-lg
+    );
+}
+
+.we-btn-sm {
+    @include button-size(
+        $input-btn-padding-y-sm,
+        $input-btn-padding-x-sm,
+        $font-size-sm,
+        $line-height-sm,
+        $btn-border-radius-sm
+    );
+}
+
+//
+// Block button
+//
+
+.we-btn-block {
+    display: block;
+    width: 100%;
+}
+
+// Vertically space out multiple block buttons
+.we-btn-block + .we-btn-block {
+    margin-top: $btn-block-spacing-y;
+}
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+    &.we-btn-block {
+        width: 100%;
+    }
+}

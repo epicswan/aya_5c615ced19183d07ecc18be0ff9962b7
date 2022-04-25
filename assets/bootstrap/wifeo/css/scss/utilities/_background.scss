@@ -1,0 +1,10 @@
+@each $color, $value in $theme-colors {
+  @include bg-variant('.we-bg-#{$color}', $value);
+}
+
+@each $color, $value in $theme-colors-bg-editor {
+  @include bg-variant('.we-bg-#{$color}', $value);
+}
+
+.we-bg-white { background-color: $white !important; }
+.we-bg-transparent { background-color: transparent !important; }
